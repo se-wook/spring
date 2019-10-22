@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- bean 등록하기 
+			1. 기본 생성자로 객체를 생성해주는 bean을 등록
+				* 속성
+				id: 컨테이너에서 객체를 식별할 이름
+					중복되면 error 발생
+					
+				class: (패키지를 포함한) 객체를 생성할 클래스의 이름
+				
+				scope: 객체의 사용범위
+				 	singleton: 한번 생성된 객체를 getBean()을 통해 전달만.
+					prototype: 객체를 미리 생성하지 않고 getBean()을 통해 요청할 때 매번 새로 생성해서 전달
+					request  : WEB에서 새로운 Request에서 getBean()을 통해 요청할 때 매번 새로 생성해서 전달(Request 가 유지되는 동안)
+					session  : WEB에서 새로운 Session에서 getBean()을 통해 요청할 때 매번 새로 생성해서 전달(Session 이 유지되는 동안)
+					
+				lazy-init:
+					- scope가 singleton 에서만 적용 가능
+					- true: 처음 getBean()을 호출 할때 객체를 생성한다.
+						-> 프로그램의 loading 속도를 높이기 위해 사용.
+					- false: container가 생성될 때 객체를 생성함
+							 lazy-init을 설정하지 않으면 기본적으로 false로 설정됨.
+							 
+				init-method: 객체 생성후 호출될 메서드를 지정
+							 => 객체 초기화 담당하는 역할.
+				
+				destroy-method: 객체가 소멸전에 호출될 메서드를 지정.
+							
+	-->
+	<bean id="board" class="com.ssafy.model.dto.Board" 
+			scope="singleton" 
+			lazy-init="true" 
+			init-method="test"
+			destroy-method="test" 
+	></bean>
+	<bean id="board2" class="com.ssafy.model.dto.Board"/>
+</beans>

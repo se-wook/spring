@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- bean 등록하기 
+			1. 기본 생성자로 객체를 생성해서 setter 메소드로 데이터를 주입
+			2. p namespace를 이용해서 setter 메서드 호출
+				=> namespace를 추가해야한다.
+			3. List, Array, Map, Set 같은 애들을 데이터로 주입할 수 없다. (속성만갖고 사용)
+			4. 형식]
+				<bean p:속성명 = "primitive or String" p:속성명-ref="이미 등록된 Bean"/>
+	-->
+	<bean id="board" class="com.ssafy.model.dto.Board" p:id="ssafy" p:title="Hello Spring"/>
+	
+</beans>

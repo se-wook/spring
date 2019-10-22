@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    
+    
+    <!-- controller  등록 -->
+	<context:component-scan base-package="com.ssafy.controller"/>
+	<!-- 사용할 resource에 대한 mapping
+			- controller와 jsp로 가는 mapping을 제외하고 모든 자원에 대한 요청이 오면
+			  location에 지정한 경로에 요청 
+			- resources 밖에 있는 css image js 같은것들은 다 필요없음.
+	 -->
+	<mvc:resources location="/resources/" 	mapping="/**"/>
+    <mvc:annotation-driven />
+    
+    <!-- 파일 처리를 위한  Resolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+	</bean>
+	
+</beans>
+
+
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+	>
+	<!-- Annotation(@) 을 이용해서 bean 등록하기
+			1. context namespace 를 추가한다.
+			
+			2. Annotation을 사용한 패키지를 인식할 수 있도록 설정 (상위 패키지를 쓰면 하위 패키지까지 모두 포함)
+					<context:component-scan base-package="패키지명"/>
+			
+			3. Bean 등록하는 Annotation(@)을 클래스 선언부에 작성
+				@Component : Bean을 등록해주는 애 
+					- 이름을 생략하면 첫 글자를 소문자로한 클래스 이름으로 bean 등록
+					@Repository : DAO를 bean으로 등록할 때 가독성을 위해 사용 (DAO야 얘는)
+					@Service : Service를 Bean으로 등록할 때 가독성을 위해 사용
+					@Controller : WEB에서 Controller를 Bean으로 등록할 때 가독성 + controller 역할
+				
+				@Component("이름")
+					- 지정한 이름으로 bean을 등록
+					
+				@Autowired : 의존 관계를 자동 주입 할 때
+					- 속성 위에, 생성자 위에, setter 위에 선언할 수 있다.
+					
+				@Qualifier("이름") : 
+					- 의존 하는 객체가 해당 타입으로 두개 이상 있을 때 이름으로 구별해서 사용. -->
+					
+	<context:component-scan base-package="com.ssafy.model.dao"/>
+	<context:component-scan base-package="com.ssafy.model.service"/>
+	<context:component-scan base-package="com.ssafy.aop"/> <!-- AOP : around 표시가 떴다. -->
+	
+	<!-- AOP 프록시 설정해주는거임  -->
+	<aop:aspectj-autoproxy/>
+	
+</beans>

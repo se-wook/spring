@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- autowire : 의존 하고 있는 객체를 자동 주입하는 것
+		 byType:
+		  	- 속성의 타입과 같은 객체를 자동 주입
+		 	- 같은 타입의 객체가 두개 이상 있으면 error 
+		 	- 기본 생성자로 객체 생성해서 setter 메소드로 주입
+		 	
+		 constructor:
+		 	- 생성자의 인자 타입과 같은 객체를 자동 주입
+		 	- 같은 타입의 객체가 두개 이상 있으면 spring 버전에 따라서 다르게 동작한다. 
+		 	
+		 byName:
+		 	- 의존하는 객체의 타입으로 두개 이상의 bean이 등록된 경우
+		 	  id 또는 name으로 구별해서 사용.
+		 	- id 또는 name이 속성 이름과 같으면 된다.
+	-->
+	
+	<bean id="boardDao" name="dao" class="com.ssafy.model.dao.BoardDaoImpl"/>
+	<bean id="boardDao2" class="com.ssafy.model.dao.BoardDaoImpl"/>
+	<bean id="boardService" class="com.ssafy.model.service.BoardServiceImpl"
+		  autowire="byName"/>
+	
+	<bean id="memberDao" class="com.ssafy.model.dao.MemberDAOImp"/>
+	<bean id="memberService" class="com.ssafy.model.service.MemberServiceImp"
+		  autowire="constructor"/>
+</beans>

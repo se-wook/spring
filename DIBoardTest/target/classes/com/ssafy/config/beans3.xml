@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byType">
+	
+	<!-- default-autowire : 의존 하고 있는 객체에 대한 주입 방식을 전역에서 설정.
+	 	 필요한 bean 위치에서 다른 타입으로 autowire를 설정할 수 있음. -->
+	
+	<bean id="boardDao" name="dao" class="com.ssafy.model.dao.BoardDaoImpl"/>
+	<bean id="boardService" class="com.ssafy.model.service.BoardServiceImpl"/>
+	
+	<bean id="memberDao" class="com.ssafy.model.dao.MemberDAOImp"/>
+	<bean id="memberService" class="com.ssafy.model.service.MemberServiceImp"/>
+</beans>

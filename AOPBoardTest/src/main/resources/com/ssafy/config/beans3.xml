@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	default-autowire="byType"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+	
+	<!-- default-autowire : 의존 하고 있는 객체에 대한 주입 방식을 전역에서 설정.
+	 	 필요한 bean 위치에서 다른 타입으로 autowire를 설정할 수 있음. -->
+	
+	<bean id="boardDao" name="dao" class="com.ssafy.model.dao.BoardDaoImpl"/>
+	<bean id="boardService" class="com.ssafy.model.service.BoardServiceImpl"/>
+	
+	<bean id="memberDao" class="com.ssafy.model.dao.MemberDAOImp"/>
+	<bean id="memberService" class="com.ssafy.model.service.MemberServiceImp"/>
+	
+	<!-- AOP 설정
+		1. 공통 코드를 작성한 Aspect를 Bean으로 등록
+		2. AOP 환경 설정
+			2.1 aop namespace 추가
+			2.2 <aop:config> ~ </aop:config>
+		
+	-->
+	<bean id='helloAop' class="com.ssafy.aop.HelloAop"/>
+	
+	<aop:config>
+		<!-- pointcut 설정
+				<aop:pointcut>태그를 통해 id를 부여한 pointcut은 aspect나 config에서 재사용이 가능하다.  -->
+		<aop:pointcut expression="execution( * com.ssafy.model.service.*ServiceImp*.search*(..))" id="searchPc"/>
+		<!-- aspect 설정 -->
+		<aop:aspect ref='helloAop'> <!-- bean id 가 왔다. -->
+			<aop:before method="hello" pointcut-ref="searchPc"/> <!-- HelloAop 클래스의 메서드 이름 (공통코드를 작성한 메서드 이름) -->	
+		</aop:aspect>		
+	</aop:config>	
+</beans>
